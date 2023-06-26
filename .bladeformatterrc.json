@@ -1,5 +1,6 @@
 {
     "indentSize": 1,
+    "wrapLineLength": 120,
     "endWithNewLine": true,
     "useTabs": true,
     "sortTailwindcssClasses": true,
