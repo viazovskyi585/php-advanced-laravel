@@ -1,0 +1,8 @@
+{
+    "indentSize": 1,
+    "endWithNewLine": true,
+    "useTabs": true,
+    "sortTailwindcssClasses": true,
+    "sortHtmlAttributes": "code-guide",
+    "noPhpSyntaxCheck": false
+}
