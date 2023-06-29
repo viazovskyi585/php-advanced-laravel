@@ -46,4 +46,14 @@ class User extends Authenticatable
         'password' => 'hashed',
         'date_of_birth' => 'date',
     ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }
