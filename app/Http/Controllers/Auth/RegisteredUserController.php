@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -36,6 +37,7 @@ class RegisteredUserController extends Controller
         $fields['password'] = Hash::make($fields['password']);
 
         $user = User::create($fields);
+        $user->assignRole(Roles::Customer->value);
 
         event(new Registered($user));
 
