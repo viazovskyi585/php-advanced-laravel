@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
         $fields['password'] = Hash::make($fields['password']);
 
         $user = User::create($fields);
-        $user->assignRole(Roles::Customer->value);
+        $user->assignRole(Roles::CUSTOMER->value);
 
         event(new Registered($user));
 
