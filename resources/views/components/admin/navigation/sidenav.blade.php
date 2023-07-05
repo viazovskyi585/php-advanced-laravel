@@ -12,8 +12,9 @@
 
 	<div class="h-sidenav block max-h-screen w-auto grow basis-full items-center overflow-auto">
 		<ul class="mb-0 flex flex-col pl-0">
+
 			<x-admin.navigation.sidenav-link title="Dashboard" link="{{ route('admin.dashboard') }}" icon="tachometer-alt"
-				active />
+				active="{{ request()->routeIs('admin.dashboard') }}" />
 
 			<x-admin.navigation.sidenav-link title="Tables" link="" icon="table" />
 
