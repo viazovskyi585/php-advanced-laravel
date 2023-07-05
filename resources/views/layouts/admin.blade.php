@@ -27,6 +27,7 @@
 		<x-admin.navigation.navbar />
 		<div class="mx-auto w-full px-6 py-6">
 			{{ $slot }}
+			<x-admin.footer />
 		</div>
 	</main>
 </body>
