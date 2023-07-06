@@ -14,14 +14,14 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
 
-    private function assignRoles(array | Collection $users, Roles $role): void
+    protected function assignRoles(array | Collection $users, Roles $role): void
     {
         foreach ($users as $user) {
             $user->assignRole($role->value);
         }
     }
 
-    private function createAdmin(): void
+    protected function createAdmin(): void
     {
         if (!User::where('email', self::ADMIN_EMAIL)->exists()) {
             $admin = User::factory()->withEmail(self::ADMIN_EMAIL)->create();
@@ -29,19 +29,19 @@ class UserSeeder extends Seeder
         }
     }
 
-    public function createManagers(): void
+    protected function createManagers(): void
     {
         $managers = User::factory()->count(2)->create();
         $this->assignRoles($managers, Roles::MANAGER);
     }
 
-    public function createEditors(): void
+    protected function createEditors(): void
     {
         $editors = User::factory()->count(2)->create();
         $this->assignRoles($editors, Roles::EDITOR);
     }
 
-    public function createCustomers(): void
+    protected function createCustomers(): void
     {
         $customers = User::factory()->count(10)->create();
         $this->assignRoles($customers, Roles::CUSTOMER);
