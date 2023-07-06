@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Roles;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::name('admin.')
+    ->prefix('admin')
+    ->middleware(['role:' . implode('|', [Roles::ADMIN->value, Roles::MANAGER->value, Roles::EDITOR->value])])
+    ->group(function () {
+        Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
+    });

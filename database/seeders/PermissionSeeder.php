@@ -25,7 +25,7 @@ class PermissionSeeder extends Seeder
         }
 
         /* ------------------Customer---------------- */
-        $customer = Role::create(['name' => Roles::Customer->value]);
+        $customer = Role::create(['name' => Roles::CUSTOMER->value]);
         $customer->givePermissionTo(array_values($permissionsConfig['account']));
 
         /* ------------------Editor------------------ */
@@ -33,18 +33,18 @@ class PermissionSeeder extends Seeder
             array_values($permissionsConfig['categories']),
             array_values($permissionsConfig['products']),
         );
-        $editor = Role::create(['name' => Roles::Editor->value]);
+        $editor = Role::create(['name' => Roles::EDITOR->value]);
         $editor->givePermissionTo($editorPermissions);
 
         /* ------------------Manager------------------ */
-        $manager = Role::create(['name' => Roles::Manager->value]);
+        $manager = Role::create(['name' => Roles::MANAGER->value]);
         $manager->givePermissionTo(array_merge(
             $editorPermissions,
             array_values($permissionsConfig['orders']),
         ));
 
         /* ------------------Admin-------------------- */
-        $role = Role::create(['name' => Roles::Admin->value]);
+        $role = Role::create(['name' => Roles::ADMIN->value]);
         $role->givePermissionTo(Permission::all());
     }
 }
