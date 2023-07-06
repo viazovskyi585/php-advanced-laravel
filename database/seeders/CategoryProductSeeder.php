@@ -19,17 +19,10 @@ class CategoryProductSeeder extends Seeder
         DB::table('categories')->delete();
         DB::table('products')->delete();
 
-        function createAndAttachProducts(Category $category, int $count): void
-        {
-            $category->products()->attach(
-                Product::factory($count)->create()->pluck('id')
-            );
-        }
-
         Category::factory(3)
             ->create()
             ->each(function (Category $category) {
-                createAndAttachProducts($category, rand(1, 3));
+                $this->createAndAttachProducts($category, rand(1, 3));
             });
 
         Category::factory(3)
@@ -38,8 +31,15 @@ class CategoryProductSeeder extends Seeder
                 Category::factory(rand(1, 3))->create([
                     'parent_id' => $category->id,
                 ])->each(function (Category $category) {
-                    createAndAttachProducts($category, rand(1, 3));
+                    $this->createAndAttachProducts($category, rand(1, 3));
                 });
             });
+    }
+
+    protected function createAndAttachProducts(Category $category, int $count): void
+    {
+        $category->products()->attach(
+            Product::factory($count)->create()->pluck('id')
+        );
     }
 }
