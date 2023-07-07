@@ -2,8 +2,14 @@
 	<div class="w-full max-w-full flex-none px-3">
 		<div
 			class="shadow-soft-xl relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border">
-			<div class="border-b-solid mb-0 rounded-t-2xl border-b-0 border-b-transparent bg-white p-6 pb-0">
-				<h6>Categories</h6>
+			<div
+				class="border-b-solid mb-0 flex items-center justify-between rounded-t-2xl border-b-0 border-b-transparent bg-white p-6 pb-0">
+				<h4>Categories</h4>
+
+				<x-app-button href="{{ route('admin.categories.create') }}" theme="primary" size="sm">
+					<i class="fas fa-plus"></i>
+					Add new category
+				</x-app-button>
 			</div>
 			<div class="flex-auto px-0 pt-0 pb-2">
 				<div class="overflow-x-auto p-0">

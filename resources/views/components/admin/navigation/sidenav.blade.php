@@ -16,8 +16,15 @@
 			<x-admin.navigation.sidenav-link title="Dashboard" link="{{ route('admin.dashboard') }}" icon="tachometer-alt"
 				active="{{ request()->routeIs('admin.dashboard') }}" />
 
+			<li class="mt-4 w-full">
+				<h6 class="ml-2 pl-6 text-xs font-bold uppercase leading-tight opacity-60">Categories</h6>
+			</li>
+
 			<x-admin.navigation.sidenav-link title="Categories" link="{{ route('admin.categories.index') }}" icon="table"
 				active="{{ request()->routeIs('admin.categories.index') }}" />
+
+			<x-admin.navigation.sidenav-link title="Create Category" link="{{ route('admin.categories.create') }}"
+				icon="plus-square" active="{{ request()->routeIs('admin.categories.create') }}" />
 
 			<li class="mt-4 w-full">
 				<h6 class="ml-2 pl-6 text-xs font-bold uppercase leading-tight opacity-60">Account pages</h6>

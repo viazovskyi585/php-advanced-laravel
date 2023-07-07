@@ -3,16 +3,20 @@
 	navbar-main navbar-scroll="true">
 	<div class="flex-wrap-inherit mx-auto flex w-full items-center justify-between px-4 py-1">
 		<nav>
-			<!-- breadcrumb -->
 			<ol class="mr-12 flex flex-wrap rounded-lg bg-transparent pt-1 sm:mr-16">
-				<li class="text-sm leading-normal">
-					<a class="text-slate-700 opacity-50" href="javascript:;">Pages</a>
-				</li>
-				<li
-					class="pl-2 text-sm capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
-					aria-current="page">Dashboard</li>
+				@foreach ($breadcrumbs as $breadcrumb)
+					@if ($loop->last)
+						<li class="text-sm leading-normal">
+							<span class="text-slate-700">{{ $breadcrumb['text'] }}</span>
+						</li>
+					@else
+						<li class="text-sm leading-normal">
+							<a class="text-slate-700 opacity-50" href="{{ $breadcrumb['href'] }}">{{ $breadcrumb['text'] }}</a>
+							<span class="px-2 text-slate-700 opacity-50">/</span>
+						</li>
+					@endif
+				@endforeach
 			</ol>
-			<h6 class="mb-0 font-bold capitalize">Dashboard</h6>
 		</nav>
 
 		<div class="mt-2 flex grow items-center sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">

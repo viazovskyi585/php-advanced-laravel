@@ -25,7 +25,7 @@
 	<main
 		class="ease-soft-in-out xl:ml-68.5 relative flex h-screen max-h-screen flex-col rounded-xl transition-all duration-200">
 		<!-- Navbar -->
-		<x-admin.navigation.navbar />
+		<x-admin.navigation.navbar :$breadcrumbs />
 		<div class="mx-auto flex w-full flex-1 flex-col px-6 py-6">
 			{{ $slot }}
 			<x-admin.footer class="" />
