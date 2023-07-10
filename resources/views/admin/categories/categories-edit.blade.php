@@ -3,7 +3,7 @@
 		<div
 			class="shadow-soft-xl relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border p-4">
 			<div class="mx-auto w-full max-w-[600px]">
-				<h4>Create category</h4>
+				<h4>Edit category "{{ $category->name }}"</h4>
 
 				<form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
 					@csrf

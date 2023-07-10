@@ -1,5 +1,14 @@
 <x-admin-layout>
 	<div class="w-full max-w-full flex-none px-3">
+
+		<ul>
+			@foreach ($errors->all() as $error)
+				<li
+					class="relative mb-4 w-full rounded-lg border border-solid border-red-300 bg-gradient-to-tl from-red-600 to-rose-400 px-4 py-2 font-bold text-white">
+					{{ $error }}</li>
+			@endforeach
+		</ul>
+
 		<div
 			class="shadow-soft-xl relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border">
 			<div

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Categories\CreateCategory;
+use App\Http\Requests\Admin\Categories\DeleteCategory;
 use App\Http\Requests\Admin\Categories\UpdateCategory;
 use App\Models\Category;
 use Illuminate\View\View;
@@ -75,8 +76,14 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeleteCategory $request, Category $category)
     {
-        //
+        if ($category->childs()->exists()) {
+            $category->childs()->update(['parent_id' => null]);
+        }
+
+        $category->deleteOrFail();
+
+        return redirect()->route('admin.categories.index');
     }
 }
