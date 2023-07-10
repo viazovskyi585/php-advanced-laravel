@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Categories\CreateCategory;
 use App\Http\Requests\Admin\Categories\DeleteCategory;
 use App\Http\Requests\Admin\Categories\UpdateCategory;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Str;
 
@@ -25,7 +26,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::all();
 
@@ -35,7 +36,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateCategory $request)
+    public function store(CreateCategory $request): RedirectResponse
     {
         $fields = $request->validated();
         $fields['slug'] = Str::of($fields['name'])->slug('-');
@@ -56,7 +57,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         $category = Category::findOrFail($id);
         $categories = Category::where('id', '!=', $id)->get();
@@ -67,7 +68,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategory $request, Category $category)
+    public function update(UpdateCategory $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
         return redirect()->route('admin.categories.index');
@@ -76,7 +77,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteCategory $request, Category $category)
+    public function destroy(DeleteCategory $request, Category $category): RedirectResponse
     {
         if ($category->childs()->exists()) {
             $category->childs()->update(['parent_id' => null]);
