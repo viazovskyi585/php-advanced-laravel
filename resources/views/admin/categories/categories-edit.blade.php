@@ -5,12 +5,13 @@
 			<div class="mx-auto w-full max-w-[600px]">
 				<h4>Create category</h4>
 
-				<form action="{{ route('admin.categories.store') }}" method="POST">
+				<form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
 					@csrf
+					@method('PUT')
 
 					<div class="mt-4">
 						<x-input-label for="name" :value="__('Name')" />
-						<x-form.input class="mt-1 block w-full" id="name" name="name" type="text" :value="old('name')" required
+						<x-form.input class="mt-1 block w-full" id="name" name="name" type="text" :value="$category->name" required
 							autofocus autocomplete="name" />
 						<x-input-error class="mt-2" :messages="$errors->get('name')" />
 					</div>
@@ -18,7 +19,7 @@
 					<div class="mt-4">
 						<x-input-label for="description" :value="__('Description')" />
 						<x-form.textarea class="mt-1 block w-full" id="description" name="description" type="text" rows="5"
-							required autofocus autocomplete="description">{{ old('description') }}</x-form.textarea>
+							required autofocus autocomplete="description">{{ $category->description }}</x-form.textarea>
 						<x-input-error class="mt-2" :messages="$errors->get('description')" />
 					</div>
 
@@ -33,7 +34,7 @@
 								    ->prepend(['value' => '', 'text' => 'None'])
 								    ->toArray();
 							@endphp
-							<x-form.select class="mt-1 block w-full" id="parent_id" name="parent_id" :value="old('parent_id')" :options="$options"
+							<x-form.select class="mt-1 block w-full" id="parent_id" name="parent_id" :value="$category->parent_id" :options="$options"
 								autofocus autocomplete="parent_id" />
 							<x-input-error class="mt-2" :messages="$errors->get('parent_id')" />
 						</div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CreateCategory;
+use App\Http\Requests\Admin\Categories\UpdateCategory;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Str;
 
 class CategoriesController extends Controller
 {
@@ -14,7 +16,7 @@ class CategoriesController extends Controller
      */
     public function index(): View
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderByDesc('id')->paginate(8);
 
         return view('admin.categories.categories-index', compact('categories'));
     }
@@ -24,15 +26,22 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.categories-create');
+        $categories = Category::all();
+
+        return view('admin.categories.categories-create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCategory $request)
     {
-        //
+        $fields = $request->validated();
+        $fields['slug'] = Str::of($fields['name'])->slug('-');
+
+        Category::create($fields);
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -48,15 +57,19 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $categories = Category::where('id', '!=', $id)->get();
+
+        return view('admin.categories.categories-edit', compact('category', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategory $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+        return redirect()->route('admin.categories.index');
     }
 
     /**

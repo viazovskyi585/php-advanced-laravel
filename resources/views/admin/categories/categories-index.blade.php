@@ -17,16 +17,16 @@
 						<thead class="align-bottom">
 							<tr>
 								<th
-									class="text-xxs border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									Name</th>
 								<th
-									class="text-xxs border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 pl-2 text-left align-middle font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 pl-2 text-left align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									Description</th>
 								<th
-									class="text-xxs border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									Parent</th>
 								<th
-									class="text-xxs border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									Actions</th>
 							</tr>
 						</thead>
