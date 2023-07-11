@@ -27,6 +27,16 @@
 				icon="plus-square" active="{{ request()->routeIs('admin.categories.create') }}" />
 
 			<li class="mt-4 w-full">
+				<h6 class="ml-2 pl-6 text-xs font-bold uppercase leading-tight opacity-60">Products</h6>
+			</li>
+
+			<x-admin.navigation.sidenav-link title="Products" link="{{ route('admin.products.index') }}" icon="table"
+				active="{{ request()->routeIs('admin.products.index') }}" />
+
+			<x-admin.navigation.sidenav-link title="Create Product" link="{{ route('admin.products.create') }}"
+				icon="plus-square" active="{{ request()->routeIs('admin.products.create') }}" />
+
+			<li class="mt-4 w-full">
 				<h6 class="ml-2 pl-6 text-xs font-bold uppercase leading-tight opacity-60">Account pages</h6>
 			</li>
 
