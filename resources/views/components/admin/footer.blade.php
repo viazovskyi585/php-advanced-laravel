@@ -1,4 +1,4 @@
-<footer class="pt-4">
+<footer class="mt-auto pt-4">
 	<div class="mx-auto flex w-full justify-end px-6">
 		<ul class="mb-0 flex list-none flex-wrap justify-center pl-0">
 			<li class="nav-item">

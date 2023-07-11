@@ -7,6 +7,9 @@ use Illuminate\View\Component;
 
 class AdminLayout extends Component
 {
+    public function __construct(public mixed $breadcrumbs = [])
+    {
+    }
     /**
      * Get the view / contents that represent the component.
      */

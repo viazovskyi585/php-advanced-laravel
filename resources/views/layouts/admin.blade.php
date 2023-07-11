@@ -22,12 +22,13 @@
 <body class="leading-default m-0 bg-gray-50 font-sans text-base font-normal text-slate-500 antialiased">
 	<x-admin.navigation.sidenav />
 
-	<main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
+	<main
+		class="ease-soft-in-out xl:ml-68.5 relative flex h-screen max-h-screen flex-col rounded-xl transition-all duration-200">
 		<!-- Navbar -->
-		<x-admin.navigation.navbar />
-		<div class="mx-auto w-full px-6 py-6">
+		<x-admin.navigation.navbar :$breadcrumbs />
+		<div class="mx-auto flex w-full flex-1 flex-col px-6 py-6">
 			{{ $slot }}
-			<x-admin.footer />
+			<x-admin.footer class="" />
 		</div>
 	</main>
 </body>

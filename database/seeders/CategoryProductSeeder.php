@@ -28,6 +28,8 @@ class CategoryProductSeeder extends Seeder
         Category::factory(3)
             ->create()
             ->each(function (Category $category) {
+                $this->createAndAttachProducts($category, rand(1, 3));
+
                 Category::factory(rand(1, 3))->create([
                     'parent_id' => $category->id,
                 ])->each(function (Category $category) {
