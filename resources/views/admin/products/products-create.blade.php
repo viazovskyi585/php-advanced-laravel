@@ -50,22 +50,21 @@
 						<x-input-error class="mt-2" :messages="$errors->get('quantity')" />
 					</div>
 
-					{{-- @if ($categories->count())
+					@if ($categories->count())
 						<div class="mt-4">
-							<x-input-label for="parent_id" :value="__('Parent')" />
+							<x-input-label for="category" :value="__('Category')" />
 							@php
 								$options = $categories
 								    ->map(function ($category) {
 								        return ['value' => $category->id, 'text' => $category->name];
 								    })
-								    ->prepend(['value' => '', 'text' => 'None'])
 								    ->toArray();
 							@endphp
-							<x-form.select class="mt-1 block w-full" id="parent_id" name="parent_id" :value="old('parent_id')" :options="$options"
-								autofocus autocomplete="parent_id" />
-							<x-input-error class="mt-2" :messages="$errors->get('parent_id')" />
+							<x-form.select class="mt-1 block w-full" id="category" name="category" :value="old('category')" :options="$options"
+								autofocus autocomplete="category" multiple />
+							<x-input-error class="mt-2" :messages="$errors->get('category')" />
 						</div>
-					@endif --}}
+					@endif
 
 					<div class="mt-6 flex">
 						<x-app-button class="w-40">

@@ -60,7 +60,7 @@
 										@endif
 									</td>
 									<td class="border-b bg-transparent p-2 text-center align-middle shadow-transparent">
-										<div class="flex items-center gap-1">
+										<div class="flex items-center justify-center gap-1">
 											<x-app-button href="{{ route('admin.categories.edit', $category) }}" theme="info" size="sm">
 												<i class="fas fa-edit"></i>
 											</x-app-button>
