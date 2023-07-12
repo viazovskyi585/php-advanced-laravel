@@ -57,7 +57,7 @@
 								<tr>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
 										<div class="px-2 py-1">
-											<img class="w-30 h-10 object-cover object-center" src="{{ $product->thumbnail_url }}"
+											<img class="w-30 rounded-2 h-10 object-cover object-center" src="{{ $product->thumbnail_url }}"
 												alt="{{ $product->title }}">
 										</div>
 									</td>
