@@ -20,6 +20,7 @@
 					Add new product
 				</x-app-button>
 			</div>
+
 			<div class="flex-auto px-0 pt-0 pb-2">
 				<div class="overflow-x-auto p-0">
 					<table class="mb-0 w-full items-center border-gray-200 align-top text-slate-500">
@@ -34,6 +35,9 @@
 								<th
 									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-4 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									SKU</th>
+								<th
+									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-4 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									Categories</th>
 								<th
 									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-4 py-3 text-right align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
 									Discount</th>
@@ -68,6 +72,17 @@
 									</td>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
 										<div class="px-2 py-1">
+											@foreach ($product->categories as $category)
+												<a class="text-xs font-semibold leading-tight text-slate-400 hover:underline"
+													href="{{ route('admin.categories.edit', $category->id) }}">{{ $category->name }}</a>
+												@if (!$loop->last)
+													,
+												@endif
+											@endforeach
+										</div>
+									</td>
+									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
+										<div class="px-2 py-1">
 											<div class="text-right text-sm font-semibold leading-normal">{{ $product->discount }}</div>
 										</div>
 									</td>
@@ -82,16 +97,18 @@
 										</div>
 									</td>
 									<td class="border-b bg-transparent p-2 text-center align-middle shadow-transparent">
-										<x-app-button href="{{ route('admin.products.edit', $product) }}" theme="info" size="sm">
-											<i class="fas fa-edit"></i>
-										</x-app-button>
-										<form class="inline-block" action="{{ route('admin.products.destroy', $product) }}" method="POST">
-											@csrf
-											@method('DELETE')
-											<x-app-button type="submit" theme="danger" size="sm">
-												<i class="fas fa-trash"></i>
+										<div class="flex items-center gap-1">
+											<x-app-button href="{{ route('admin.products.edit', $product) }}" theme="info" size="sm">
+												<i class="fas fa-edit"></i>
 											</x-app-button>
-										</form>
+											<form class="inline-block" action="{{ route('admin.products.destroy', $product) }}" method="POST">
+												@csrf
+												@method('DELETE')
+												<x-app-button type="submit" theme="danger" size="sm">
+													<i class="fas fa-trash"></i>
+												</x-app-button>
+											</form>
+										</div>
 									</td>
 								</tr>
 							@endforeach

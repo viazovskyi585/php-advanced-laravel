@@ -10,7 +10,7 @@
 
 	<hr class="mt-0 h-px bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent">
 
-	<div class="h-sidenav block max-h-screen w-auto grow basis-full items-center overflow-auto">
+	<div class="block max-h-screen w-auto grow basis-full items-center overflow-auto">
 		<ul class="mb-0 flex flex-col pl-0">
 
 			<x-admin.navigation.sidenav-link title="Dashboard" link="{{ route('admin.dashboard') }}" icon="tachometer-alt"

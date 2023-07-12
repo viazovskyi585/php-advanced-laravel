@@ -20,6 +20,7 @@
 					Add new category
 				</x-app-button>
 			</div>
+
 			<div class="flex-auto px-0 pt-0 pb-2">
 				<div class="overflow-x-auto p-0">
 					<table class="mb-0 w-full items-center border-gray-200 align-top text-slate-500">
@@ -59,16 +60,18 @@
 										@endif
 									</td>
 									<td class="border-b bg-transparent p-2 text-center align-middle shadow-transparent">
-										<x-app-button href="{{ route('admin.categories.edit', $category) }}" theme="info" size="sm">
-											<i class="fas fa-edit"></i>
-										</x-app-button>
-										<form class="inline-block" action="{{ route('admin.categories.destroy', $category) }}" method="POST">
-											@csrf
-											@method('DELETE')
-											<x-app-button type="submit" theme="danger" size="sm">
-												<i class="fas fa-trash"></i>
+										<div class="flex items-center gap-1">
+											<x-app-button href="{{ route('admin.categories.edit', $category) }}" theme="info" size="sm">
+												<i class="fas fa-edit"></i>
 											</x-app-button>
-										</form>
+											<form class="inline-block" action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+												@csrf
+												@method('DELETE')
+												<x-app-button type="submit" theme="danger" size="sm">
+													<i class="fas fa-trash"></i>
+												</x-app-button>
+											</form>
+										</div>
 									</td>
 								</tr>
 							@endforeach
