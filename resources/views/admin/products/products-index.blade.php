@@ -57,7 +57,8 @@
 								<tr>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
 										<div class="px-2 py-1">
-											<div class="text-sm leading-normal">T</div>
+											<img class="w-30 h-10 object-cover object-center" src="{{ $product->thumbnail_url }}"
+												alt="{{ $product->title }}">
 										</div>
 									</td>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
@@ -72,13 +73,17 @@
 									</td>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
 										<div class="px-2 py-1">
-											@foreach ($product->categories as $category)
-												<a class="text-xs font-semibold leading-tight text-slate-400 hover:underline"
-													href="{{ route('admin.categories.edit', $category->id) }}">{{ $category->name }}</a>
-												@if (!$loop->last)
-													,
-												@endif
-											@endforeach
+											@if ($product->categories->isNotEmpty())
+												@foreach ($product->categories as $category)
+													<a class="text-xs font-semibold leading-tight text-slate-400 hover:underline"
+														href="{{ route('admin.categories.edit', $category->id) }}">{{ $category->name }}</a>
+													@if (!$loop->last)
+														,
+													@endif
+												@endforeach
+											@else
+												<span>-</span>
+											@endif
 										</div>
 									</td>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
