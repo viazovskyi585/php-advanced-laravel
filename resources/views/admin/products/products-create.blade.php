@@ -17,7 +17,7 @@
 
 					<div class="mt-4">
 						<x-input-label for="sku" :value="__('SKU')" />
-						<x-form.input class="mt-1 block w-full" id="sku" name="sku" type="text" :value="old('sku')" required
+						<x-form.input class="mt-1 block w-full" id="sku" name="SKU" type="text" :value="old('SKU')" required
 							autofocus autocomplete="sku" />
 						<x-input-error class="mt-2" :messages="$errors->get('sku')" />
 					</div>
@@ -39,30 +39,31 @@
 					<div class="mt-4">
 						<x-input-label for="discount" :value="__('Discount')" />
 						<x-form.input class="mt-1 block w-full" id="discount" name="discount" type="number" :value="old('discount') ?? 0" required
-							autofocus autocomplete="discount" />
+							autofocus autocomplete="discount" min="0" max="100" />
 						<x-input-error class="mt-2" :messages="$errors->get('discount')" />
 					</div>
 
 					<div class="mt-4">
 						<x-input-label for="quantity" :value="__('Quantity')" />
 						<x-form.input class="mt-1 block w-full" id="quantity" name="quantity" type="quantity" :value="old('quantity')" required
-							autofocus autocomplete="quantity" />
+							autofocus autocomplete="quantity" min="0" />
 						<x-input-error class="mt-2" :messages="$errors->get('quantity')" />
 					</div>
 
 					@if ($categories->count())
 						<div class="mt-4">
-							<x-input-label for="category" :value="__('Category')" />
+							<x-input-label for="categories" :value="__('Categories')" />
 							@php
 								$options = $categories
 								    ->map(function ($category) {
 								        return ['value' => $category->id, 'text' => $category->name];
 								    })
+								    ->prepend(['value' => '', 'text' => 'None'])
 								    ->toArray();
 							@endphp
-							<x-form.select class="mt-1 block w-full" id="category" name="category" :value="old('category')" :options="$options"
-								autofocus autocomplete="category" multiple />
-							<x-input-error class="mt-2" :messages="$errors->get('category')" />
+							<x-form.select class="mt-1 block w-full" id="categories" name="categories[]" :value="old('categories')"
+								:options="$options" autofocus autocomplete="categories" multiple />
+							<x-input-error class="mt-2" :messages="$errors->get('categories')" />
 						</div>
 					@endif
 

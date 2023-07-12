@@ -75,11 +75,8 @@
 										<div class="px-2 py-1">
 											@if ($product->categories->isNotEmpty())
 												@foreach ($product->categories as $category)
-													<a class="text-xs font-semibold leading-tight text-slate-400 hover:underline"
-														href="{{ route('admin.categories.edit', $category->id) }}">{{ $category->name }}</a>
-													@if (!$loop->last)
-														,
-													@endif
+													<a class="block text-xs font-semibold leading-tight text-slate-400 hover:underline"
+														href="{{ route('admin.categories.edit', $category->id) }}">{{ $category->name }}{{ $loop->last ? '' : ',' }}</a>
 												@endforeach
 											@else
 												<span>-</span>
