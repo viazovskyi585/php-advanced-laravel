@@ -1,6 +1,8 @@
-import './bootstrap';
+import "./bootstrap";
+import multiselect from "./alpine-components/multiselect";
+import Alpine from "alpinejs";
 
-import Alpine from 'alpinejs';
+Alpine.data("multiselect", multiselect);
 
 window.Alpine = Alpine;
 

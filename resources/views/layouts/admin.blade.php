@@ -16,7 +16,7 @@
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
 	<!-- Scripts -->
-	@vite(['resources/css/app.css', 'resources/css/admin/admin.styles.css', 'resources/js/admin/admin.app.js'])
+	@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/admin/admin.styles.css', 'resources/js/admin/admin.app.js'])
 </head>
 
 <body class="leading-default m-0 bg-gray-50 font-sans text-base font-normal text-slate-500 antialiased">

@@ -1,3 +1,11 @@
+@php
+	$categoriesOptions = $categories
+	    ->map(function ($category) {
+	        return ['value' => $category->id, 'text' => $category->name];
+	    })
+	    ->toArray();
+@endphp
+
 <x-admin-layout :breadcrumbs="[['text' => 'Products', 'href' => route('admin.products.index')], ['text' => 'Create']]">
 	<div class="w-full max-w-full flex-none px-3">
 		<div
@@ -18,54 +26,45 @@
 					<div class="mt-4">
 						<x-input-label for="sku" :value="__('SKU')" />
 						<x-form.input class="mt-1 block w-full" id="sku" name="SKU" type="text" :value="old('SKU')" required
-							autofocus autocomplete="sku" />
+							autocomplete="sku" />
 						<x-input-error class="mt-2" :messages="$errors->get('sku')" />
 					</div>
+
+					@if ($categories->count())
+						<div class="mt-4">
+							<x-input-label for="categories" :value="__('Categories')" />
+							<x-form.multiselect id="categories" name="categories[]" :options="$categoriesOptions" :value="old('categories') ?? []" />
+							<x-input-error class="mt-2" :messages="$errors->get('categories')" />
+						</div>
+					@endif
 
 					<div class="mt-4">
 						<x-input-label for="description" :value="__('Description')" />
 						<x-form.textarea class="mt-1 block w-full" id="description" name="description" type="text" rows="5"
-							required autofocus autocomplete="description">{{ old('description') }}</x-form.textarea>
+							autocomplete="description">{{ old('description') }}</x-form.textarea>
 						<x-input-error class="mt-2" :messages="$errors->get('description')" />
 					</div>
 
 					<div class="mt-4">
 						<x-input-label for="price" :value="__('Price')" />
 						<x-form.input class="mt-1 block w-full" id="price" name="price" type="number" :value="old('price')" required
-							autofocus autocomplete="price" />
+							autocomplete="price" />
 						<x-input-error class="mt-2" :messages="$errors->get('price')" />
 					</div>
 
 					<div class="mt-4">
 						<x-input-label for="discount" :value="__('Discount')" />
-						<x-form.input class="mt-1 block w-full" id="discount" name="discount" type="number" :value="old('discount') ?? 0" required
-							autofocus autocomplete="discount" min="0" max="100" />
+						<x-form.input class="mt-1 block w-full" id="discount" name="discount" type="number" :value="old('discount') ?? 0"
+							autocomplete="discount" min="0" max="100" />
 						<x-input-error class="mt-2" :messages="$errors->get('discount')" />
 					</div>
 
 					<div class="mt-4">
 						<x-input-label for="quantity" :value="__('Quantity')" />
-						<x-form.input class="mt-1 block w-full" id="quantity" name="quantity" type="quantity" :value="old('quantity')" required
-							autofocus autocomplete="quantity" min="0" />
+						<x-form.input class="mt-1 block w-full" id="quantity" name="quantity" type="quantity" :value="old('quantity')"
+							autocomplete="quantity" min="0" />
 						<x-input-error class="mt-2" :messages="$errors->get('quantity')" />
 					</div>
-
-					@if ($categories->count())
-						<div class="mt-4">
-							<x-input-label for="categories" :value="__('Categories')" />
-							@php
-								$options = $categories
-								    ->map(function ($category) {
-								        return ['value' => $category->id, 'text' => $category->name];
-								    })
-								    ->prepend(['value' => '', 'text' => 'None'])
-								    ->toArray();
-							@endphp
-							<x-form.select class="mt-1 block w-full" id="categories" name="categories[]" :value="old('categories')"
-								:options="$options" autofocus autocomplete="categories" multiple />
-							<x-input-error class="mt-2" :messages="$errors->get('categories')" />
-						</div>
-					@endif
 
 					<div class="mt-6 flex">
 						<x-app-button class="w-40">
