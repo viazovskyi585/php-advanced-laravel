@@ -37,8 +37,8 @@
 	</div>
 
 	{{--  Dropdown  --}}
-	<div class="absolute left-0 top-full z-40 max-h-96 w-full overflow-y-auto rounded bg-white shadow" x-show="open"
-		x-transition>
+	<div class="absolute left-0 top-full z-40 max-h-96 w-full overflow-y-auto rounded bg-white shadow"
+		x-on:click.away="open = false" x-show="open" x-transition>
 		<div class="flex w-full flex-col">
 			<template x-for="(option, index) in options" :key="index">
 				<div class="w-full cursor-pointer rounded-t border-b border-gray-100 hover:bg-fuchsia-100"
