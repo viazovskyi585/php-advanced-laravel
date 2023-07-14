@@ -636,7 +636,8 @@ export default {
             "soft-2xl": "0 .3125rem .625rem 0 rgba(0,0,0,.12)",
             "soft-3xl":
                 "0 8px 26px -4px hsla(0,0%,8%,.15),0 8px 9px -5px hsla(0,0%,8%,.06)",
-            "soft-primary-outline": "0 0 0 2px #e9aede",
+            "soft-primary-outline":
+                "rgb(255, 255, 255) 0px 0px 0px 0px, rgb(33, 82, 255) 0px 0px 0px 1px, rgb(233, 174, 222) 0px 0px 0px 2px",
             blur: "inset 0 0 1px 1px hsla(0,0%,100%,.9),0 20px 27px 0 rgba(0,0,0,.05)",
             DEFAULT:
                 "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",

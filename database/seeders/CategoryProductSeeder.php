@@ -25,6 +25,9 @@ class CategoryProductSeeder extends Seeder
                 $this->createAndAttachProducts($category, rand(1, 3));
             });
 
+
+        Product::factory(5)->create()->pluck('id');
+
         Category::factory(3)
             ->create()
             ->each(function (Category $category) {
