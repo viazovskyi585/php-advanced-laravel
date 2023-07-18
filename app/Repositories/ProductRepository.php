@@ -14,8 +14,8 @@ class ProductRepository implements ProductRepositoryContract
     {
         try {
             DB::beginTransaction();
-
             $data = $this->processRequestData($request);
+            ksort($data['attributes']);
             $product = Product::create($data['attributes']);
             $this->attachCategories($product, $data['categories']);
 
@@ -35,7 +35,6 @@ class ProductRepository implements ProductRepositoryContract
         $attributes = collect($validated)->except(['categories'])->toArray();
 
         $attributes['slug'] = $this->generateSlug($attributes['title']);
-        $attributes['thumbnail'] = 'https://via.placeholder.com/640x480.png/000033?text=laborum';
 
         return [
             'attributes' => $attributes,

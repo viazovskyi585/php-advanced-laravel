@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\FileStorageService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +46,19 @@ class Product extends Model
                 }
 
                 return Storage::url($thumbnail);
+            }
+        );
+    }
+
+    public function thumbnail(): Attribute
+    {
+        return Attribute::make(
+            set: function ($image) {
+                if (!empty($this->attributes['thumbnail'])) {
+                    FileStorageService::delete($this->attributes['thumbnail']);
+                }
+
+                return FileStorageService::store($image, $this->attributes['slug']);
             }
         );
     }

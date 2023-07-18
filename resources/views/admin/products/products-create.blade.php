@@ -13,7 +13,9 @@
 			<div class="mx-auto w-full max-w-[600px]">
 				<h4>Create Product</h4>
 
-				<form action="{{ route('admin.products.store') }}" method="POST">
+				{{ $errors->any() ? $errors->first() : '' }}
+
+				<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
 					@csrf
 
 					<div class="mt-4">
