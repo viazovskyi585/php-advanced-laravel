@@ -66,6 +66,20 @@
 						<x-input-error class="mt-2" :messages="$errors->get('quantity')" />
 					</div>
 
+					<div class="mt-4">
+						<x-input-label for="thumbnail" :value="__('Thumbnail')" />
+						<x-form.image-input class="mt-1" id="thumbnail" name="thumbnail" accept=".png, .jpg, .jpeg"
+							:value="old('thumbnail')" />
+						<x-input-error class="mt-2" :messages="$errors->get('thumbnail')" />
+					</div>
+
+					<div class="mt-4">
+						<x-input-label for="images" :value="__('Images')" />
+						<x-form.image-input class="mt-1" id="images" name="images[]" multiple accept=".png, .jpg, .jpeg"
+							:value="old('images')" />
+						<x-input-error class="mt-2" :messages="$errors->get('images')" />
+					</div>
+
 					<div class="mt-6 flex">
 						<x-app-button class="w-40">
 							<i class="fas fa-save"></i>
