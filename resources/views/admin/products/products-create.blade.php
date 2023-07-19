@@ -9,11 +9,9 @@
 <x-admin-layout :breadcrumbs="[['text' => 'Products', 'href' => route('admin.products.index')], ['text' => 'Create']]">
 	<div class="w-full max-w-full flex-none px-3">
 		<div
-			class="shadow-soft-xl relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border p-4">
+			class="relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border p-4 shadow-soft-xl">
 			<div class="mx-auto w-full max-w-[600px]">
 				<h4>Create Product</h4>
-
-				{{ $errors->any() ? $errors->first() : '' }}
 
 				<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
 					@csrf
