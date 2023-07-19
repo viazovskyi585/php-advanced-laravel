@@ -20,13 +20,10 @@ class ProductRepository implements ProductRepositoryContract
         try {
             DB::beginTransaction();
             $data = $this->processRequestData($request);
-            ksort($data['attributes']);
             $product = Product::create($data['attributes']);
-            $this->attachCategories($product, $data['categories']);
-            $this->imageRepository->attach($product, 'images', $data['attributes']['images'] ?? [], $data['attributes']['slug']);
+            $this->attachRelationalData($product, $data);
 
             DB::commit();
-
             return $product;
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -41,6 +38,7 @@ class ProductRepository implements ProductRepositoryContract
         $attributes = collect($validated)->except(['categories'])->toArray();
 
         $attributes['slug'] = $this->generateSlug($attributes['title']);
+        ksort($attributes);
 
         return [
             'attributes' => $attributes,
@@ -58,5 +56,14 @@ class ProductRepository implements ProductRepositoryContract
     protected function generateSlug(string $title): string
     {
         return Str::slug($title, '-');
+    }
+
+    protected function attachRelationalData(Product $product, array $data): void
+    {
+        $this->attachCategories($product, $data['categories']);
+
+        if (!empty($data['attributes']['images'])) {
+            $this->imageRepository->attach($product, 'images', $data['attributes']['images'], $data['attributes']['slug']);
+        }
     }
 }
