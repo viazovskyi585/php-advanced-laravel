@@ -4,12 +4,17 @@ namespace App\Repositories;
 
 use App\Http\Requests\Admin\Products\StoreProductRequest;
 use App\Models\Product;
+use App\Repositories\Contracts\ImageRepositoryContract;
 use App\Repositories\Contracts\ProductRepositoryContract;
 use DB;
 use Illuminate\Support\Str;
 
 class ProductRepository implements ProductRepositoryContract
 {
+    public function __construct(protected ImageRepositoryContract $imageRepository)
+    {
+    }
+
     public function create(StoreProductRequest $request): Product|false
     {
         try {
@@ -18,6 +23,7 @@ class ProductRepository implements ProductRepositoryContract
             ksort($data['attributes']);
             $product = Product::create($data['attributes']);
             $this->attachCategories($product, $data['categories']);
+            $this->imageRepository->attach($product, 'images', $data['attributes']['images'] ?? [], $data['attributes']['slug']);
 
             DB::commit();
 
