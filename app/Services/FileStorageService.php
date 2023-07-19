@@ -27,6 +27,6 @@ class FileStorageService implements FileStorageServiceContract
 
     public static function delete(string $path): void
     {
-        //
+        Storage::delete($path);
     }
 }
