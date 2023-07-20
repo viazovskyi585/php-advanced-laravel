@@ -15,11 +15,11 @@
 	{{-- Input --}}
 	<div {{ $attributes->merge(['class' => 'w-full']) }}>
 		<div
-			class="focus-within:shadow-soft-primary-outline my-2 flex rounded-lg border border-solid border-gray-300 bg-white p-1 focus-within:border-fuchsia-300">
+			class="my-2 flex rounded-lg border border-solid border-gray-300 bg-white p-1 focus-within:border-fuchsia-300 focus-within:shadow-soft-primary-outline">
 			<div class="flex flex-auto flex-wrap">
 				<template x-for="(selectedOption, index) in selectedOptions" :key="index">
 					<div
-						class="m-1 flex items-center justify-center rounded-full border border-fuchsia-300 bg-fuchsia-100 py-1 px-2 font-medium text-fuchsia-700">
+						class="m-1 flex items-center justify-center rounded-full border border-fuchsia-300 bg-fuchsia-100 px-2 py-1 font-medium text-fuchsia-700">
 						<div class="max-w-full flex-initial text-xs font-normal leading-none" x-text="selectedOption.text"></div>
 						<div class="flex flex-auto flex-row-reverse" x-on:click="removeSelectedOption(selectedOption)">
 							<i class="fa fa-times ml-2 h-4 w-4 cursor-pointer hover:text-fuchsia-400" aria-hidden="true"></i>

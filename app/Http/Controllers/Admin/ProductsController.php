@@ -55,7 +55,10 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $productCategories = $product->categories;
+
+        return view('admin.products.products-edit', compact('product', 'categories', 'productCategories'));
     }
 
     /**
@@ -71,6 +74,9 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->categories()->detach();
+        $product->delete();
+
+        return redirect()->route('admin.products.index');
     }
 }
