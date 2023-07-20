@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Products\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryContract;
+use App\Repositories\ProductRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -64,9 +65,11 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product, ProductRepository $productRepository): RedirectResponse
     {
-        //
+        return $productRepository->update($request, $product)
+            ? redirect()->route('admin.products.index')
+            : redirect()->back()->withInput();
     }
 
     /**

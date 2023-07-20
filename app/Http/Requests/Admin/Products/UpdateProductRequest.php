@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Products;
 
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -22,8 +23,18 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $productId = $this->route('product')->id;
+
         return [
-            //
+            'title' => ['required', 'string', 'min:2', 'max:255', Rule::unique('products', 'title')->ignore($productId)],
+            'description' => ['nullable', 'string'],
+            'SKU' => ['required', 'string', 'min:1', 'max:35', Rule::unique('products', 'SKU')->ignore($productId)],
+            'price' => ['required', 'numeric', 'min:1'],
+            'discount' => ['required', 'numeric', 'min:0', 'max:99'],
+            'quantity' => ['required', 'numeric', 'min:0'],
+            'categories.*' => ['nullable', 'numeric', 'exists:App\Models\Category,id'],
+            'thumbnail' => ['nullable', 'image:jpeg,png', 'max:5120'],
+            'images.*' => ['image:jpeg,png', 'max:5120'],
         ];
     }
 }
