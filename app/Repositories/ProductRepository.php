@@ -22,6 +22,7 @@ class ProductRepository implements ProductRepositoryContract
             DB::beginTransaction();
             $data = $this->processRequestData($request);
             $product = Product::create($data['attributes']);
+            $this->attachCategories($product, $data['categories']);
             $this->attachRelationalData($product, $data);
 
             DB::commit();
@@ -40,6 +41,7 @@ class ProductRepository implements ProductRepositoryContract
             $data = $this->processRequestData($request);
             $product = $request->route('product');
             $product->update($data['attributes']);
+            $this->syncCategories($product, $data['categories']);
             $this->attachRelationalData($product, $data);
 
             DB::commit();
@@ -72,6 +74,13 @@ class ProductRepository implements ProductRepositoryContract
         }
     }
 
+    protected function syncCategories(Product $product, array $categories): void
+    {
+        if (!empty($categories)) {
+            $product->categories()->sync($categories);
+        }
+    }
+
     protected function generateSlug(string $title): string
     {
         return Str::slug($title, '-');
@@ -79,7 +88,7 @@ class ProductRepository implements ProductRepositoryContract
 
     protected function attachRelationalData(Product $product, array $data): void
     {
-        $this->attachCategories($product, $data['categories']);
+
 
         if (!empty($data['attributes']['images'])) {
             $this->imageRepository->attach($product, 'images', $data['attributes']['images'], $data['attributes']['slug']);
