@@ -19,6 +19,9 @@
 					<x-nav-link :href="route('home')" :active="request()->routeIs('home')">
 						{{ __('Home') }}
 					</x-nav-link>
+					<x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+						{{ __('Categories') }}
+					</x-nav-link>
 				</div>
 			</div>
 
@@ -103,6 +106,9 @@
 		<div class="space-y-1 pb-3 pt-2">
 			<x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
 				{{ __('Home') }}
+			</x-responsive-nav-link>
+			<x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+				{{ __('Categories') }}
 			</x-responsive-nav-link>
 		</div>
 
