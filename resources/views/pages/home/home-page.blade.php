@@ -1,27 +1,10 @@
 <x-app-layout>
 
-	{{-- <x-banner link="#" linkText="test"></x-banner> --}}
+	<x-banner link="#" linkText="test"></x-banner>
 
 	<section class="bg-white py-8">
 
 		<div class="container mx-auto flex flex-wrap items-center pb-12 pt-4">
-
-
-			<nav class="top-0 z-30 w-full px-6 py-1" id="store">
-				<div class="container mx-auto mt-0 flex w-full flex-wrap items-center justify-between px-2 py-3">
-
-					<a class="text-xl font-bold uppercase tracking-wide text-gray-800 no-underline hover:no-underline" href="#">
-						Categories
-					</a>
-				</div>
-				<div class="container mx-auto mt-0 flex w-full flex-wrap items-center justify-start px-2 py-3">
-					@foreach ($categories as $category)
-						<a
-							class="mr-3 inline-block rounded-full border-2 border-solid border-gray-300 px-4 py-1 text-xl tracking-wide text-gray-500 no-underline hover:no-underline"
-							href="#">{{ $category->name }}</a>
-					@endforeach
-				</div>
-			</nav>
 
 			<nav class="top-0 z-30 w-full px-6 py-1" id="store">
 				<div class="container mx-auto mt-0 flex w-full flex-wrap items-center justify-between px-2 py-3">
@@ -51,9 +34,7 @@
 				</div>
 			</nav>
 
-			{{-- @foreach ($products as $product)
-				<x-product-grid :product="$product" />
-			@endforeach --}}
+			<x-products.products-grid :products="$products" />
 		</div>
 	</section>
 
