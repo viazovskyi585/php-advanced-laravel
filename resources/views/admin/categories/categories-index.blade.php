@@ -10,7 +10,7 @@
 		</ul>
 
 		<div
-			class="shadow-soft-xl relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border">
+			class="relative mb-6 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid border-transparent bg-white bg-clip-border shadow-soft-xl">
 			<div
 				class="border-b-solid mb-0 flex items-center justify-between rounded-t-2xl border-b-0 border-b-transparent bg-white p-6 pb-0">
 				<h4>Categories</h4>
@@ -21,28 +21,41 @@
 				</x-app-button>
 			</div>
 
-			<div class="flex-auto px-0 pt-0 pb-2">
+			@dump($categories)
+
+			<div class="flex-auto px-0 pb-2 pt-0">
 				<div class="overflow-x-auto p-0">
 					<table class="mb-0 w-full items-center border-gray-200 align-top text-slate-500">
 						<thead class="align-bottom">
 							<tr>
 								<th
-									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid whitespace-nowrap border-b border-gray-200 bg-transparent px-4 py-3 text-left align-middle text-xs font-bold uppercase tracking-none text-slate-400 opacity-70 shadow-none">
+									Image</th>
+								<th
+									class="border-b-solid whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-left align-middle text-xs font-bold uppercase tracking-none text-slate-400 opacity-70 shadow-none">
 									Name</th>
 								<th
-									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 pl-2 text-left align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 pl-2 text-left align-middle text-xs font-bold uppercase tracking-none text-slate-400 opacity-70 shadow-none">
 									Description</th>
 								<th
-									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase tracking-none text-slate-400 opacity-70 shadow-none">
 									Parent</th>
 								<th
-									class="border-b-solid tracking-none whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase text-slate-400 opacity-70 shadow-none">
+									class="border-b-solid whitespace-nowrap border-b border-gray-200 bg-transparent px-6 py-3 text-center align-middle text-xs font-bold uppercase tracking-none text-slate-400 opacity-70 shadow-none">
 									Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($categories as $category)
 								<tr>
+									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
+										<div class="px-2 py-1">
+											@if ($category->image)
+												<img class="h-10 w-30 rounded-2 object-cover object-center" src="{{ $category->image->url }}"
+													alt="{{ $category->name }}">
+											@endif
+										</div>
+									</td>
 									<td class="border-b bg-transparent p-2 align-middle shadow-transparent">
 										<div class="flex px-2 py-1">
 											<div class="flex flex-col justify-center">
