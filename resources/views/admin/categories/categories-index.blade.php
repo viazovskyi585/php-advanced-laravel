@@ -21,8 +21,6 @@
 				</x-app-button>
 			</div>
 
-			@dump($categories)
-
 			<div class="flex-auto px-0 pb-2 pt-0">
 				<div class="overflow-x-auto p-0">
 					<table class="mb-0 w-full items-center border-gray-200 align-top text-slate-500">

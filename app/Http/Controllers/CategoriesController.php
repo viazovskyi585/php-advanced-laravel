@@ -9,7 +9,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('parent_id', null)->get();
+        $categories = Category::with('image')->where('parent_id', null)->get();
 
         return view('pages.categories.categories-page', compact('categories'));
     }
