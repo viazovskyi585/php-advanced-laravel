@@ -67,7 +67,7 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product, ProductRepository $productRepository): RedirectResponse
     {
-        return $productRepository->update($request, $product)
+        return $productRepository->update($product, $request)
             ? redirect()->route('admin.products.index')
             : redirect()->back()->withInput();
     }
