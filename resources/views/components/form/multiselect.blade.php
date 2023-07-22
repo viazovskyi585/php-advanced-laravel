@@ -42,9 +42,8 @@
 		<div class="flex w-full flex-col">
 			<template x-for="(option, index) in options" :key="index">
 				<div class="w-full cursor-pointer rounded-t border-b border-gray-100 hover:bg-fuchsia-100"
-					x-bind:data-index="index" x-on:click="handleOptionClick(index)">
-					<div class="relative flex w-full items-center border-l-2 border-transparent p-2 pl-2 hover:border-fuchsia-100"
-						x-bind:class="{ 'border-fuchsia-600': option.selected }">
+					x-on:click="handleOptionClick(index)" x-bind:class="{ 'bg-fuchsia-100': option.selected }">
+					<div class="relative flex w-full items-center border-l-2 border-transparent p-2 pl-2 hover:border-fuchsia-100">
 						<div class="flex w-full items-center">
 							<div class="mx-2 leading-6" x-text="option.text"></div>
 						</div>
