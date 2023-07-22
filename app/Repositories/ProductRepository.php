@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryContract
         }
     }
 
-    public function update(UpdateProductRequest $request): Product|false
+    public function update(Product $product, UpdateProductRequest $request): bool
     {
         try {
             DB::beginTransaction();
@@ -45,7 +45,7 @@ class ProductRepository implements ProductRepositoryContract
             $this->attachRelationalData($product, $data);
 
             DB::commit();
-            return $product;
+            return true;
         } catch (\Exception $exception) {
             DB::rollBack();
             logs()->warning($exception);
