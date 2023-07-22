@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\FileStorageService;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -15,5 +17,14 @@ class Image extends Model
     public function imageable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    protected function path(): Attribute
+    {
+        return Attribute::make(
+            set: function (array $value) {
+                return FileStorageService::store($value['image'], $value['directory'] ?? null);
+            },
+        );
     }
 }

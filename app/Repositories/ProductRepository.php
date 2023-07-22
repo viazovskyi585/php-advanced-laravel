@@ -4,23 +4,26 @@ namespace App\Repositories;
 
 use App\Http\Requests\Admin\Products\StoreProductRequest;
 use App\Models\Product;
+use App\Repositories\Contracts\ImageRepositoryContract;
 use App\Repositories\Contracts\ProductRepositoryContract;
 use DB;
 use Illuminate\Support\Str;
 
 class ProductRepository implements ProductRepositoryContract
 {
+    public function __construct(protected ImageRepositoryContract $imageRepository)
+    {
+    }
+
     public function create(StoreProductRequest $request): Product|false
     {
         try {
             DB::beginTransaction();
-
             $data = $this->processRequestData($request);
             $product = Product::create($data['attributes']);
-            $this->attachCategories($product, $data['categories']);
+            $this->attachRelationalData($product, $data);
 
             DB::commit();
-
             return $product;
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -35,7 +38,7 @@ class ProductRepository implements ProductRepositoryContract
         $attributes = collect($validated)->except(['categories'])->toArray();
 
         $attributes['slug'] = $this->generateSlug($attributes['title']);
-        $attributes['thumbnail'] = 'https://via.placeholder.com/640x480.png/000033?text=laborum';
+        ksort($attributes);
 
         return [
             'attributes' => $attributes,
@@ -53,5 +56,14 @@ class ProductRepository implements ProductRepositoryContract
     protected function generateSlug(string $title): string
     {
         return Str::slug($title, '-');
+    }
+
+    protected function attachRelationalData(Product $product, array $data): void
+    {
+        $this->attachCategories($product, $data['categories']);
+
+        if (!empty($data['attributes']['images'])) {
+            $this->imageRepository->attach($product, 'images', $data['attributes']['images'], $data['attributes']['slug']);
+        }
     }
 }
