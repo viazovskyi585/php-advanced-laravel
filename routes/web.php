@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('categories.index');
+Route::get('/categories/{slugs}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show')->where('slugs', '.*');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
