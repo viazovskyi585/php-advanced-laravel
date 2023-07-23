@@ -5,7 +5,7 @@
 <div {{ $attributes->merge(['class' => 'flex flex-wrap items-center']) }}>
 	@foreach ($products as $product)
 		<div class="flex w-full flex-col p-6 md:w-1/3 xl:w-1/4">
-			<a href="#">
+			<a href="{{ route('products.show', $product->slug) }}">
 				<div class="relative h-64">
 					<img class="h-full w-full object-cover hover:grow hover:shadow-lg" src="{{ $product->thumbnailUrl }}">
 					@if ($product->discount)

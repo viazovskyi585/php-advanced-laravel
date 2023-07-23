@@ -36,4 +36,21 @@ class Category extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function fullUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $url = $this->attributes['slug'];
+                $parent = $this->parent;
+
+                while ($parent) {
+                    $url = $parent->slug . '/' . $url;
+                    $parent = $parent->parent;
+                }
+
+                return $url;
+            }
+        );
+    }
 }

@@ -19,6 +19,7 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('categories.index');
 Route::get('/categories/{slugs}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show')->where('slugs', '.*');
+Route::get('product/{product:slug}', [\App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
 
 Route::middleware('auth')->group(function () {
