@@ -26,14 +26,10 @@ class CategoriesController extends Controller
             $categories->push($category);
         }
 
-        if ($categories->last()->childs->count() > 0) {
-            $parentCategories = $categories;
-            $categories = $categories->last()->childs;
-            $parentSlugs = $slugs . '/';
-            return view('pages.categories.categories-page', compact('categories', 'parentSlugs', 'parentCategories'));
-        } else {
-            $products = $categories->last()->products()->paginate(12);
-            return view('pages.products.products-page', compact('categories', 'products'));
-        }
+        $parentCategories = $categories;
+        $categories = $categories->last()->childs;
+        $parentSlugs = $slugs . '/';
+        $products = $category->products()->paginate(12);
+        return view('pages.categories.categories-page', compact('categories', 'parentSlugs', 'parentCategories', 'products', 'category'));
     }
 }
