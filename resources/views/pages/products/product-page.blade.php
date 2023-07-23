@@ -37,8 +37,6 @@
 							@endif
 						</div>
 
-						<p class="text-gray-500">{{ $product->description }}</p>
-
 						<div class="flex space-x-4 py-4">
 
 							<x-app-button class="h-14 rounded-xl bg-indigo-600 px-6 py-2 font-semibold text-white hover:bg-indigo-500"
@@ -49,6 +47,30 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="mt-8">
+				<h2 class="mt-8">Description</h2>
+				<p class="text-gray-600">{{ $product->description }}</p>
+			</div>
+
+			@if ($product->images->count() > 0)
+				<h2 class="mt-8">Gallery</h2>
+				<div class="relative h-120 w-full" x-data="{ image: 0 }">
+					@foreach ($product->images as $image)
+						<img class="h-full w-full object-contain" src="{{ $image->url }}" alt="{{ $product->name }}"
+							x-show="image === {{ $loop->index }}" />
+					@endforeach
+
+					<button class="absolute left-0 top-0 h-full w-12 bg-gray-200 hover:bg-gray-300"
+						x-on:click="image = image === 0 ? {{ count($product->images) - 1 }} : image - 1">
+						<i class="fas fa-chevron-left"></i>
+					</button>
+					<button class="absolute right-0 top-0 h-full w-12 bg-gray-200 hover:bg-gray-300"
+						x-on:click="image = image === {{ count($product->images) - 1 }} ? 0 : image + 1">
+						<i class="fas fa-chevron-right"></i>
+					</button>
+				</div>
+			@endif
 		</div>
 	</section>
 </x-app-layout>
