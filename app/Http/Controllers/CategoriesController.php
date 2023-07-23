@@ -18,16 +18,15 @@ class CategoriesController extends Controller
     public function show(string $slugs): View
     {
         $segments = explode('/', $slugs);
-        $categories = collect();
+        $parentCategories = collect();
         $category = null;
 
         foreach ($segments as $segment) {
             $category = Category::where('slug', $segment)->firstOrFail();
-            $categories->push($category);
+            $parentCategories->push($category);
         }
 
-        $parentCategories = $categories;
-        $categories = $categories->last()->childs;
+        $categories = $parentCategories->last()->childs;
         $parentSlugs = $slugs . '/';
         $products = $category->products()->paginate(12);
         return view('pages.categories.categories-page', compact('categories', 'parentSlugs', 'parentCategories', 'products', 'category'));
