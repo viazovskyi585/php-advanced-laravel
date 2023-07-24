@@ -21,6 +21,14 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Observe the application's events.
+     */
+    protected $observers = [
+        \App\Models\Image::class => \App\Observers\ImageObserver::class,
+        \App\Models\Product::class => \App\Observers\ProductObserver::class,
+    ];
+
+    /**
      * Register any events for your application.
      */
     public function boot(): void

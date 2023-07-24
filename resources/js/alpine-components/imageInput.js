@@ -30,7 +30,15 @@ export default () => ({
 
     removeImage(index) {
         this.images.splice(index, 1);
-        this.$refs.input.files = this.images.map((image) => image.file);
+        const dt = new DataTransfer();
+
+        for (let i = 0; i < this.$refs.input.files.length; i++) {
+            if (i !== index) {
+                dt.items.add(this.$refs.input.files[i]);
+            }
+        }
+
+        this.$refs.input.files = dt.files;
     },
 
     init() {

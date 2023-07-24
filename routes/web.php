@@ -39,3 +39,9 @@ Route::name('admin.')
         Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class)->except(['show']);
         Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class)->except(['show']);
     });
+
+Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function () {
+    Route::group(['role:' . implode('|', [Roles::ADMIN->value, Roles::MANAGER->value, Roles::EDITOR->value])], function () {
+        Route::delete('delete-image/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('image.delete');
+    });
+});
