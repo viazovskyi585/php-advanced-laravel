@@ -15,6 +15,6 @@ class HomeController extends Controller
     {
         $products = Product::orderByDesc('id')->take(8)->get();
 
-        return view('pages.home.home-page', compact('categories', 'products'));
+        return view('pages.home.home-page', compact('products'));
     }
 }
