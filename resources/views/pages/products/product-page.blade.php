@@ -14,7 +14,7 @@
 						<p class="text-sm text-gray-500">
 							<span>Categories: </span>
 							@foreach ($product->categories as $category)
-								<a class="text-indigo-600 hover:underline"
+								<a class="text-fuchsia-600 hover:underline"
 									href="{{ route('categories.show', $category->fullUrl) }}">{{ $category->name }}</a>
 								@if (!$loop->last)
 									,
@@ -25,8 +25,8 @@
 						<div class="my-4 flex items-center space-x-4">
 							<div>
 								<div class="flex rounded-lg bg-gray-100 px-3 py-2">
-									<span class="mr-1 mt-1 text-indigo-400">$</span>
-									<span class="text-3xl font-bold text-indigo-600">{{ $product->endPrice }}</span>
+									<span class="mr-1 mt-1 text-fuchsia-400">$</span>
+									<span class="text-3xl font-bold text-fuchsia-600">{{ $product->endPrice }}</span>
 								</div>
 							</div>
 							@if ($product->discount)
@@ -39,8 +39,9 @@
 
 						<div class="flex space-x-4 py-4">
 
-							<x-app-button class="h-14 rounded-xl bg-indigo-600 px-6 py-2 font-semibold text-white hover:bg-indigo-500"
-								type="button">
+							<x-cart-input :max="$product->quantity" />
+
+							<x-app-button type="button">
 								Add to Cart
 							</x-app-button>
 						</div>
