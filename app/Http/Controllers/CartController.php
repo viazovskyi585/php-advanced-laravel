@@ -27,6 +27,7 @@ class CartController extends Controller
         $data = $this->validate($request, [
             'rowId' => 'required|string',
         ]);
+
         try {
             Cart::instance('cart')->remove($data['rowId']);
         } catch (Exception $e) {
@@ -42,6 +43,7 @@ class CartController extends Controller
             'rowId' => 'required|string',
             'quantity' => 'required|integer|min:1',
         ]);
+
         try {
             Cart::instance('cart')->update($data['rowId'], $data['quantity']);
         } catch (Exception $e) {

@@ -3,16 +3,6 @@
 		<div class="container py-8">
 			<h1 class="my-8 text-center text-3xl font-bold">Your Cart</h1>
 
-			@if ($errors->any())
-				<div class="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700" role="alert">
-					<ul class="list-disc">
-						@foreach ($errors->all() as $error)
-							<li class="text-sm">{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-			@endif
-
 			<div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
 				<div class="rounded-lg md:w-2/3">
 					@forelse (Cart::instance('cart')->content() as $row)
@@ -25,7 +15,8 @@
 									</a>
 								</div>
 								<div class="flex flex-col items-end">
-									<form action="{{ route('cart.count', $row->model) }}" method="POST" x-data x-on:change="$el.submit()">
+									<form action="{{ route('cart.count', $row->model) }}" method="POST" x-data
+										x-on:change.debounce="$el.submit()">
 										@csrf
 										<input name="rowId" type="hidden" value="{{ $row->rowId }}" />
 										<x-cart-input class="w-16" name="quantity" :value="$row->qty" :max="$row->model->quantity" />
