@@ -1,9 +1,9 @@
 @props([
-    'value' => 1,
     'max' => 1,
+    'name' => 'count',
 ])
 
-<div class="flex items-center space-x-4 rounded-4 bg-gray-50 px-2" x-data="{ value: {{ $value }} }">
+<div class="flex items-center space-x-4 rounded-4 bg-gray-50 px-2" x-data="{ value: 1 }">
 	<button
 		class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none"
 		type="button" x-on:click="value = value === 1 ? 1 : value - 1">

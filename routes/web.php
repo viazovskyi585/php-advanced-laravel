@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 });
 
 require __DIR__ . '/auth.php';
@@ -43,4 +45,11 @@ Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function () {
     Route::group(['role:' . implode('|', [Roles::ADMIN->value, Roles::MANAGER->value, Roles::EDITOR->value])], function () {
         Route::delete('delete-image/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('image.delete');
     });
+});
+
+Route::name('cart.')->prefix('cart')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::post('{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('index');
+    Route::delete('/', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+    Route::post('{product}/count', [\App\Http\Controllers\CartController::class, 'updateCount'])->name('count');
 });

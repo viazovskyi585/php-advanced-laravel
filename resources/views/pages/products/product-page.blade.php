@@ -37,14 +37,14 @@
 							@endif
 						</div>
 
-						<div class="flex space-x-4 py-4">
+						<form class="flex space-x-4 py-4" method="POST" action="#" x-data>
 
-							<x-cart-input :max="$product->quantity" />
+							<x-cart-input name="count" :max="$product->quantity" />
 
-							<x-app-button type="button">
+							<x-app-button type="submit" x-on:click.prevent="console.log('button click', $root)">
 								Add to Cart
 							</x-app-button>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
