@@ -24,8 +24,11 @@ class CartController extends Controller
 
     public function remove(Request $request)
     {
+        $data = $this->validate($request, [
+            'rowId' => 'required|string',
+        ]);
         try {
-            Cart::instance('cart')->remove($request->get('rowId'));
+            Cart::instance('cart')->remove($data['rowId']);
         } catch (Exception $e) {
             logs()->warning($e);
         } finally {
@@ -33,8 +36,18 @@ class CartController extends Controller
         }
     }
 
-    public function updateCount(Request $request, Product $product)
+    public function updateCount(Request $request)
     {
-        //
+        $data = $this->validate($request, [
+            'rowId' => 'required|string',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        try {
+            Cart::instance('cart')->update($data['rowId'], $data['quantity']);
+        } catch (Exception $e) {
+            logs()->warning($e);
+        } finally {
+            return redirect()->back();
+        }
     }
 }

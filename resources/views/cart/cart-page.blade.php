@@ -2,30 +2,61 @@
 	<section class="mt-10 bg-white">
 		<div class="container py-8">
 			<h1 class="my-8 text-center text-3xl font-bold">Your Cart</h1>
+
+			@if ($errors->any())
+				<div class="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700" role="alert">
+					<ul class="list-disc">
+						@foreach ($errors->all() as $error)
+							<li class="text-sm">{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+
 			<div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
 				<div class="rounded-lg md:w-2/3">
 					@forelse (Cart::instance('cart')->content() as $row)
-						<div class="mb-6 justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-							<img class="h-40 w-full rounded-lg object-cover sm:w-40" src="{{ $row->model->thumbnailUrl }}" alt="image" />
-							<div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-								<div class="mt-5 sm:mt-0">
+						<div class="mb-6 justify-between rounded-lg bg-white p-6 shadow-md lg:flex lg:justify-start">
+							<img class="h-40 w-full rounded-lg object-cover lg:w-40" src="{{ $row->model->thumbnailUrl }}" alt="image" />
+							<div class="lg:ml-4 lg:flex lg:w-full lg:justify-between">
+								<div class="mt-5 lg:mt-0">
 									<a href="{{ route('products.show', $row->model) }}">
 										<h2 class="text-lg font-bold text-gray-900">{{ $row->name }} {{ $row->qty }}</h2>
 									</a>
 								</div>
 								<div class="flex flex-col items-end">
-									<x-cart-input class="w-16" name="xx" :value="$row->qty" :max="$row->model->quantity" />
-									<div class="mt-auto flex items-center justify-self-end">
+									<form action="{{ route('cart.count', $row->model) }}" method="POST" x-data x-on:change="$el.submit()">
+										@csrf
+										<input name="rowId" type="hidden" value="{{ $row->rowId }}" />
+										<x-cart-input class="w-16" name="quantity" :value="$row->qty" :max="$row->model->quantity" />
+									</form>
+									<div class="mt-auto flex w-full items-center justify-between lg:w-auto lg:justify-self-end">
 										<div>
-											<p class="text-md m-0">Price: {{ $row->price }} $</p>
-											<p class="m-0 text-lg">Total: {{ $row->total }} $</p>
+											<p class="text-md m-0">Price:
+												@if ($row->model->discount)
+													<span class="text-xs text-red-400 line-through">{{ $row->model->price }} $</span>
+													<span class="font-bold text-green-600">{{ $row->price }} $</span>
+												@else
+													{{ $row->price }} $
+												@endif
+											</p>
+											<p class="m-0 text-lg">Total:
+												@if ($row->model->discount)
+													<span class="text-xs text-red-400 line-through">{{ $row->model->price * $row->qty }} $</span>
+													<span class="font-bold text-green-600">{{ $row->subtotal }} $</span>
+												@else
+													{{ $row->subtotal }} $
+												@endif
+											</p>
 										</div>
 
 										<form action="{{ route('cart.remove') }}" method="POST">
 											@csrf
 											@method('DELETE')
 											<input name="rowId" type="hidden" value="{{ $row->rowId }}" />
-											<x-app-button class="ml-4" size="sm" theme="warning">Remove</x-app-button>
+											<x-app-button class="ml-4" size="sm" theme="warning">
+												<i class="fas fa-trash-alt"></i>
+											</x-app-button>
 										</form>
 									</div>
 								</div>
