@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('cart.index');
+        return view('cart.cart-page');
     }
 
     public function add(Request $request, Product $product)

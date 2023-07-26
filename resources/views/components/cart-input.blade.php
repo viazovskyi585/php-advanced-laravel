@@ -1,5 +1,5 @@
 @props([
-    'max' => 1,
+    'max' => 0,
     'name' => 'count',
 ])
 
@@ -17,14 +17,14 @@
                 value = 1
             } else if (value < 1) {
                 value = 1
-            } else if (value > {{ $max }}) {
+            } else if ({{ $max }} && value > {{ $max }}) {
                 value = {{ $max }}
             }
         " />
 	<button
 		class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none"
 		class="fas fa-plus" type="button"
-		x-on:click="value = value >= {{ $max }} ? {{ $max }} : value + 1">
+		x-on:click="value = ({{ $max }} && value >= {{ $max }}) ? {{ $max }} : value + 1">
 		<i class="fas fa-plus"></i>
 	</button>
 </div>
