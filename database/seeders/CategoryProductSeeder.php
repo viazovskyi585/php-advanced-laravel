@@ -4,12 +4,17 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\ImageRepository;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class CategoryProductSeeder extends Seeder
 {
+    public function __construct(protected ImageRepository $imageRepository)
+    {
+    }
     /**
      * Run the database seeds.
      */
@@ -19,8 +24,7 @@ class CategoryProductSeeder extends Seeder
         DB::table('categories')->delete();
         DB::table('products')->delete();
 
-        Category::factory(3)
-            ->create()
+        $this->createCategories(3)
             ->each(function (Category $category) {
                 $this->createAndAttachProducts($category, rand(1, 3));
             });
@@ -28,17 +32,28 @@ class CategoryProductSeeder extends Seeder
 
         Product::factory(5)->create()->pluck('id');
 
-        Category::factory(3)
-            ->create()
+        $this->createCategories(3)
             ->each(function (Category $category) {
                 $this->createAndAttachProducts($category, rand(1, 3));
 
-                Category::factory(rand(1, 3))->create([
-                    'parent_id' => $category->id,
-                ])->each(function (Category $category) {
-                    $this->createAndAttachProducts($category, rand(1, 3));
-                });
+                $this->createCategories(rand(1, 3), $category->id)
+                    ->each(function (Category $category) {
+                        $this->createAndAttachProducts($category, rand(1, 3));
+                    });
             });
+    }
+
+    protected function createCategories(int $count, ?int $parent_id = null): Collection
+    {
+        $categories = Category::factory($count)->create([
+            'parent_id' => $parent_id,
+        ]);
+
+        $categories->each(function (Category $category) {
+            $this->imageRepository->attach($category, 'image', [fake()->imageUrl()], $category->slug);
+        });
+
+        return $categories;
     }
 
     protected function createAndAttachProducts(Category $category, int $count): void

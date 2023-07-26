@@ -1,10 +1,10 @@
 <aside
-	class="max-w-62.5 ease-nav-brand z-990 fixed inset-y-0 my-4 ml-4 block w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-none transition-transform duration-200 xl:left-0 xl:translate-x-0 xl:bg-transparent">
+	class="ease-nav-brand fixed inset-y-0 z-990 my-4 ml-4 block w-full max-w-62.5 -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-none transition-transform duration-200 xl:left-0 xl:translate-x-0 xl:bg-transparent">
 	<div class="h-19.5">
-		<i class="fas fa-times absolute top-0 right-0 hidden cursor-pointer p-4 text-slate-400 opacity-50 xl:hidden"
+		<i class="fas fa-times absolute right-0 top-0 hidden cursor-pointer p-4 text-slate-400 opacity-50 xl:hidden"
 			aria-hidden="true" sidenav-close=""></i>
-		<a class="m-0 block whitespace-nowrap px-8 py-6 text-sm text-slate-700" href="javascript:;" target="_blank">
-			<span class="ease-nav-brand ml-1 font-semibold transition-all duration-200">Soft UI Dashboard</span>
+		<a class="m-0 block whitespace-nowrap px-8 py-6 text-sm text-slate-700" href="{{ route('home') }}">
+			<span class="ease-nav-brand ml-1 font-semibold transition-all duration-200">Go to Website</span>
 		</a>
 	</div>
 

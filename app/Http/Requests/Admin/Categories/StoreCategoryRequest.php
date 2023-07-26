@@ -6,7 +6,7 @@ use App\Models\Category;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategory extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class CreateCategory extends FormRequest
             'name' => ['required', 'string', 'min:2', 'max:255', 'unique:' . Category::class],
             'description' => ['nullable', 'string', 'min:2', 'max:255'],
             'parent_id' => ['nullable', 'integer', 'exists:' . Category::class . ',id'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048'],
         ];
     }
 }
