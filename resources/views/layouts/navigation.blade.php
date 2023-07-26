@@ -83,9 +83,13 @@
 
 				<!-- Cart -->
 				<a
-					class="flex items-center justify-center px-4 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-					href="#">
+					class="relative flex items-center justify-center px-4 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+					href="{{ route('cart.index') }}">
 					<i class="fas fa-shopping-cart"></i>
+					@if (Cart::instance('cart')->count() > 0)
+						<span
+							class="top-50 absolute right-0 inline-flex -translate-y-1/2 translate-x-1/2 transform items-center justify-center rounded-full bg-red-600 px-2 py-1 text-xs font-bold font-bold leading-none text-red-100">{{ Cart::instance('cart')->content()->count() }}</span>
+					@endif
 				</a>
 			</div>
 

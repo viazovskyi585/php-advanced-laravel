@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,7 +16,9 @@ class CartController extends Controller
 
     public function add(Request $request, Product $product)
     {
-        //
+        Cart::instance('cart')->add($product, $request->get('quantity', 1));
+
+        return redirect()->back();
     }
 
     public function remove(Request $request)

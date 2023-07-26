@@ -37,11 +37,11 @@
 							@endif
 						</div>
 
-						<form class="flex space-x-4 py-4" method="POST" action="#" x-data>
+						<form class="flex space-x-4 py-4" method="POST" action="{{ route('cart.add', $product) }}" x-data>
+							@csrf
+							<x-cart-input name="quantity" :max="$product->quantity" />
 
-							<x-cart-input name="count" :max="$product->quantity" />
-
-							<x-app-button type="submit" x-on:click.prevent="console.log('button click', $root)">
+							<x-app-button type="submit">
 								Add to Cart
 							</x-app-button>
 						</form>
