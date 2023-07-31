@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
+
+    Route::get('/orders/{orderId}/success', \App\Http\Controllers\Payment\PaymentSuccessController::class)->name('orders.success');
 });
 
 require __DIR__ . '/auth.php';
@@ -44,6 +46,11 @@ Route::name('admin.')
 Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function () {
     Route::group(['role:' . implode('|', [Roles::ADMIN->value, Roles::MANAGER->value, Roles::EDITOR->value])], function () {
         Route::delete('delete-image/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('image.delete');
+    });
+
+    Route::prefix('paypal')->name('paypal.')->group(function () {
+        Route::post('order/create', [\App\Http\Controllers\Payment\PaypalController::class, 'create'])->name('order.create');
+        Route::post('order/{orderId}/capture', [\App\Http\Controllers\Payment\PaypalController::class, 'capture'])->name('order.capture');
     });
 });
 
