@@ -39,6 +39,7 @@ class CreateOrderRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(Redirect::back()->withErrors($this->validator)->withInput());
+        $view = view('pages.checkout.checkout-page')->with('errors', $validator->errors())->fragment('form');
+        throw new HttpResponseException(response($view, 422));
     }
 }
