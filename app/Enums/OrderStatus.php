@@ -4,10 +4,10 @@ namespace App\Enums;
 
 enum OrderStatus: string
 {
-    case InProcess = 'In process';
-    case Paid = 'Paid';
-    case Completed = 'Completed';
-    case Cancelled = 'Cancelled';
+    case IN_PROCESS = 'In process';
+    case PAID = 'Paid';
+    case COMPLETED = 'Completed';
+    case CANCELLED = 'Cancelled';
 
     public function findByKey(string $key): OrderStatus
     {

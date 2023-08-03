@@ -16,10 +16,11 @@ return new class extends Migration
 
             $table->foreignId('status_id')->constrained('order_statuses');
             $table->foreignId('user_id')->constrained('users');
+            $table->string('vendor_order_id')->unique();
 
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone_number', 20);
 
             $table->string('city', 50);

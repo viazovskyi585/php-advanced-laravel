@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Rules\PhoneNumber;
-use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use \Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\Facades\Redirect;
 
 class CreateOrderRequest extends FormRequest
 {
@@ -40,6 +38,6 @@ class CreateOrderRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $view = view('pages.checkout.checkout-page')->with('errors', $validator->errors())->fragment('form');
-        throw new HttpResponseException(response($view, 422));
+        throw new HttpResponseException(response($view, 422, ['X-Validated-View' => 'true']));
     }
 }
