@@ -36,11 +36,9 @@ paypal
 
         // Call your server to finalize the transaction
         async onApprove(data, actions) {
-            console.log(data);
             const response = await axios.post(
                 `/ajax/paypal/order/${data.orderID}/capture`
             );
-            console.log(response);
             const orderData = response.data;
 
             // Three cases to handle:
