@@ -10,7 +10,7 @@
 			<div class="overflow-hidden bg-white p-5 shadow-xl sm:rounded-lg">
 				<h1 class="text-2xl font-bold">Order {{ $order->status->name }}</h1>
 				<p class="text-lg">Thank you for your order.</p>
-				<p class="text-lg">Your order number is {{ $order->id }}.</p>
+				<a class="text-blue-500 hover:text-blue-700" href="{{ route('orders.show', $order) }}">View Order</a>
 				<p class="text-lg">We have emailed your order confirmation, and will send you an update when your order has shipped.
 				</p>
 			</div>
