@@ -15,4 +15,15 @@ class OrdersController extends Controller
 
         return view('pages.orders.orders-page', compact('orders'));
     }
+
+    public function show(Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $order->load(['products', 'status']);
+
+        return view('pages.orders.order-page', compact('order'));
+    }
 }

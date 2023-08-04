@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [\App\Http\Controllers\OrdersController::class, 'show'])->name('orders.show');
 
     Route::get('/checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 

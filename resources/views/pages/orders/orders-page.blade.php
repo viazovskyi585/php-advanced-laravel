@@ -72,7 +72,7 @@
 								</td>
 								<td class="border-b bg-transparent p-2 text-center align-middle shadow-transparent">
 									<div class="flex items-center justify-center gap-1">
-										<x-app-button href="#" theme="info" size="sm">
+										<x-app-button href="{{ route('orders.show', $order) }}" theme="info" size="sm">
 											<i class="fas fa-eye"></i>
 										</x-app-button>
 									</div>
