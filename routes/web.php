@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders.index');
+
     Route::get('/checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 
     Route::get('/orders/{orderId}/success', \App\Http\Controllers\Payment\PaymentSuccessController::class)->name('orders.success');

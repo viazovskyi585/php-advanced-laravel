@@ -52,6 +52,10 @@
 									{{ __('Profile') }}
 								</x-dropdown-link>
 
+								<x-dropdown-link :href="route('orders.index')">
+									{{ __('Orders') }}
+								</x-dropdown-link>
+
 								@hasanyrole(implode('|', [Roles::EDITOR->value, Roles::MANAGER->value, Roles::ADMIN->value]))
 									<x-dropdown-link :href="route('admin.dashboard')">
 										{{ __('Admin Dashboard') }}
