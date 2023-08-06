@@ -29,7 +29,7 @@ class UpdateCategoryRequest extends FormRequest
             'name' => ['required', 'string', 'min:2', 'max:255', 'unique:' . Category::class . ',name,' . $categoryId],
             'description' => ['nullable', 'string', 'min:2', 'max:255'],
             'parent_id' => ['nullable', 'integer', 'exists:' . Category::class . ',id'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048'],
+            'image' => ['image', 'mimes:jpg,jpeg,png,gif,svg', 'max:2048'],
         ];
     }
 }
