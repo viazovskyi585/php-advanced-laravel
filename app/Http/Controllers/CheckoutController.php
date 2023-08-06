@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        echo 'Checkout';
+        return view('pages.checkout.checkout-page');
     }
 }

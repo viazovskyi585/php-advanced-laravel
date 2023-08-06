@@ -75,7 +75,7 @@
 							<p class="mb-1 text-lg font-bold">${{ Cart::instance('cart')->total() }}</p>
 						</div>
 					</div>
-					<x-app-button class="w-full">Check out</x-app-button>
+					<x-app-button class="w-full" href="{{ route('checkout') }}">Check out</x-app-button>
 				</div>
 			</div>
 		</div>

@@ -37,14 +37,18 @@
 							@endif
 						</div>
 
-						<form class="flex space-x-4 py-4" method="POST" action="{{ route('cart.add', $product) }}" x-data>
-							@csrf
-							<x-cart-input name="quantity" :max="$product->quantity" />
+						@if ($product->quantity > 0)
+							<form class="flex space-x-4 py-4" method="POST" action="{{ route('cart.add', $product) }}" x-data>
+								@csrf
+								<x-cart-input name="quantity" :max="$product->quantity" />
 
-							<x-app-button type="submit">
-								Add to Cart
-							</x-app-button>
-						</form>
+								<x-app-button type="submit">
+									Add to Cart
+								</x-app-button>
+							</form>
+						@else
+							<p class="text-red-500">Out of stock</p>
+						@endif
 					</div>
 				</div>
 			</div>
