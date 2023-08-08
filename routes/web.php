@@ -21,6 +21,11 @@ Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'i
 Route::get('/categories/{slugs}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show')->where('slugs', '.*');
 Route::get('product/{product:slug}', [\App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
+Route::get('/event', function () {
+    $order = \App\Models\Order::all()->last();
+    \App\Events\OrderCreated::dispatch($order);
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\OrderCreated;
+use App\Jobs\OrderCreatedNotifyJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -21,6 +22,6 @@ class OrderCreatedListener
      */
     public function handle(OrderCreated $event): void
     {
-        dd($event);
+        OrderCreatedNotifyJob::dispatch($event->order)->onQueue('notifications');
     }
 }
