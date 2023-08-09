@@ -32,7 +32,7 @@ class OrderCreatedNotifyJob implements ShouldQueue
     public function handle(): void
     {
         logs()->info(self::class);
-        $this->order->user->notify(new OrderCreatedCustomerNotification($this->order));
+        $this->order->notify(app()->make(OrderCreatedCustomerNotification::class));
         Notification::send(User::role(Roles::ADMIN->value)->get(), new OrderCreatedAdminNotification($this->order));
     }
 }

@@ -43,7 +43,7 @@ class InvoicesService implements InvoicesServiceContract
 
     protected function generateFileName(Order $order): string
     {
-        return Str::of("{$order->id}_{$order->first_name}-{$order->lastName}_{$order->created_at->format('d-m-Y')}")
+        return Str::of("{$order->id}_{$order->first_name}-{$order->lastName}_{$order->created_at->format('d-m-Y-H-i')}")
             ->slug('-');
     }
 

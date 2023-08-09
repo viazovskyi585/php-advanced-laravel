@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'status_id',
