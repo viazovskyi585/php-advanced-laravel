@@ -2,6 +2,7 @@
 
 namespace App\Notifications\Orders\Created;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +15,7 @@ class OrderCreatedAdminNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected Order $order)
     {
         //
     }
@@ -32,12 +33,22 @@ class OrderCreatedAdminNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail(): MailMessage
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+        $message =  (new MailMessage)
+            ->subject('New order created')
+            ->greeting('Hello, admin!')
+            ->line('New order has been created.')
+            ->line('Order status: ' . $this->order->status->name->value)
+            ->line('Order total: ' . $this->order->total_price);
+
+        foreach ($this->order->products as $product) {
+            $message->line($product->pivot->quantity . 'x ' . $product->title . ' - ' . $product->pivot->single_price . ' = ' . $product->pivot->quantity * $product->pivot->single_price);
+        }
+
+        $message->line('Customer: ' . $this->order->user->name . ' (' . $this->order->user->email . ')');
+
+        return $message;
     }
 
     /**
