@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $name,
             'slug' => $slug,
-            'description' => fake()->sentences(rand(1, 5), true),
+            'description' => fake()->sentences(rand(1, 2), true),
         ];
     }
 }
