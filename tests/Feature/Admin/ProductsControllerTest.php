@@ -15,16 +15,13 @@ class ProductsControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
-    }
-
     protected function afterRefreshingDatabase()
     {
-        $this->seed();
+        $this->seed([
+            \Database\Seeders\PermissionSeeder::class,
+            \Database\Seeders\UserSeeder::class,
+            \Database\Seeders\CategoryProductSeeder::class,
+        ]);
     }
 
     protected function getUser(Roles $role = Roles::ADMIN): User
