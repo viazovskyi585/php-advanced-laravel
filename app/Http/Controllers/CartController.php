@@ -28,7 +28,7 @@ class CartController extends Controller
             return $item->id === $product->id;
         })->sum('qty');
 
-        if ($product->quantity > $quantity + $inCartQty) {
+        if ($product->quantity >= $quantity + $inCartQty) {
             Cart::instance('cart')->add($product, $quantity);
         }
 

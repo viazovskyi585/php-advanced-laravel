@@ -18,6 +18,11 @@ class OrderStatus extends Model
         'name' => EnumsOrderStatus::class,
     ];
 
+    public function getName(): string
+    {
+        return $this->name->value;
+    }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);

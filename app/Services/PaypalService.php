@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\PaymentSystem;
 use App\Enums\TransactionStatus;
+use App\Events\OrderCreated;
 use App\Http\Requests\CreateOrderRequest;
 use App\Repositories\Contracts\OrderRepositoryContract;
 use App\Services\Contracts\PaymentServiceContract;
@@ -57,7 +58,9 @@ class PaypalService implements PaymentServiceContract
             $order = $repository->setTransaction($vendorOrderId, PaymentSystem::PAYPAL, $this->convertStatus($result['status']));
 
             DB::commit();
+
             Cart::instance('cart')->destroy();
+            OrderCreated::dispatch($order);
 
             return response()->json($order);
         } catch (Exception $e) {

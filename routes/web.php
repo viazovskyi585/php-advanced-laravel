@@ -21,7 +21,6 @@ Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'i
 Route::get('/categories/{slugs}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show')->where('slugs', '.*');
 Route::get('product/{product:slug}', [\App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
