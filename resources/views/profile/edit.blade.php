@@ -13,6 +13,10 @@
 						@include('profile.partials.telegram-button')
 					</div>
 				</div>
+			@else
+				<div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+					<div class="max-w-xl">Telegram ID: {{ $user->telegram_id }}</div>
+				</div>
 			@endunless
 
 			<div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
