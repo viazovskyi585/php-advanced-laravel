@@ -8,11 +8,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use LaravelDaily\Invoices\Invoice;
+use NotificationChannels\Telegram\TelegramMessage;
 use Storage;
 
 class OrderCreatedCustomerNotification extends Notification
 {
     use Queueable;
+
+    protected Invoice $invoice;
 
     /**
      * Create a new notification instance.
@@ -27,9 +31,9 @@ class OrderCreatedCustomerNotification extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via(Order $order): array
     {
-        return ['mail'];
+        return $order?->user?->telegram_id ? ['mail', 'telegram'] : ['mail'];
     }
 
     /**
@@ -37,7 +41,7 @@ class OrderCreatedCustomerNotification extends Notification
      */
     public function toMail(Order $order): MailMessage
     {
-        $invoice = $this->invoicesService->generate($order);
+        $this->invoice = $this->getInvoice($order);
 
         return (new MailMessage)
             ->subject('Order #' . $order->id . ' created')
@@ -45,9 +49,34 @@ class OrderCreatedCustomerNotification extends Notification
             ->lineIf($order->status !== \App\Enums\OrderStatus::IN_PROCESS, 'Your order will be processed soon.')
             ->line('You can download your invoice here:')
             ->line('Download invoice in attachment')
-            ->attach(Storage::disk('public')->path($invoice->filename), [
-                'as'   => $invoice->filename,
+            ->attach(Storage::disk('public')->path($this->invoice->filename), [
+                'as'   => $this->invoice->filename,
                 'mime' => 'application/pdf',
             ]);
+    }
+
+    /**
+     * Get the telegram representation of the notification.
+     */
+    public function toTelegram(Order $order): TelegramMessage
+    {
+        $this->invoice = $this->getInvoice($order);
+
+        return TelegramMessage::create()
+            ->to($order->user->telegram_id)
+            ->content("Hello, $order->first_name $order->last_name!")
+            ->line('Your order was created!')
+            ->line('Order ID: ' . $order->id)
+            ->line('You can download your invoice here:')
+            ->button('Download invoice', $this->invoice->url());
+    }
+
+    protected function getInvoice(Order $order): Invoice
+    {
+        if (isset($this->invoice)) {
+            return $this->invoice;
+        } else {
+            return $this->invoicesService->generate($order);
+        }
     }
 }

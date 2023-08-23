@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Roles;
+use App\Http\Controllers\Callbacks\TelegramController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 
     Route::get('/orders/{orderId}/success', \App\Http\Controllers\Payment\PaymentSuccessController::class)->name('orders.success');
+
+    Route::name('callbacks.')->prefix('callbacks')->group(function () {
+        Route::get('telegram', TelegramController::class)->name('telegram');
+    });
 });
 
 require __DIR__ . '/auth.php';
