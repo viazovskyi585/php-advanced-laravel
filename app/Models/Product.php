@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\FileStorageService;
+use Cache;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,13 +41,15 @@ class Product extends Model implements Buyable
     {
         return Attribute::make(
             get: function () {
-                $thumbnail = $this->attributes['thumbnail'];
+                $key = "products.thumbnail.{$this->attributes['thumbnail']}";
 
-                if (!Storage::exists($thumbnail)) {
-                    return $thumbnail;
+                if (!Cache::has($key)) {
+                    $link = Storage::temporaryUrl($this->attributes['thumbnail'], now()->addMinutes(10));
+                    Cache::put($key, $link, 570);
+                    return $link;
                 }
 
-                return Storage::url($thumbnail);
+                return Cache::get($key);
             }
         );
     }
@@ -61,7 +64,7 @@ class Product extends Model implements Buyable
 
                 return FileStorageService::store($image, $this->attributes['slug']);
             }
-        );
+        )->withoutObjectCaching();
     }
 
     public function price(): Attribute
