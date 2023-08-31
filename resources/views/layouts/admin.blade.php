@@ -16,14 +16,15 @@
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
 	<!-- Scripts -->
+	<link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
 	@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/admin/admin.styles.css', 'resources/js/admin/admin.app.js'])
 </head>
 
-<body class="leading-default m-0 bg-gray-50 font-sans text-base font-normal text-slate-500 antialiased">
+<body class="m-0 bg-gray-50 font-sans text-base font-normal leading-default text-slate-500 antialiased">
 	<x-admin.navigation.sidenav />
 
 	<main
-		class="ease-soft-in-out xl:ml-68.5 relative flex h-screen max-h-screen flex-col rounded-xl transition-all duration-200">
+		class="relative flex h-screen max-h-screen flex-col rounded-xl transition-all duration-200 ease-soft-in-out xl:ml-68.5">
 		<!-- Navbar -->
 		<x-admin.navigation.navbar :$breadcrumbs />
 		<div class="mx-auto flex w-full flex-1 flex-col px-6 py-6">
@@ -31,6 +32,8 @@
 			<x-admin.footer class="" />
 		</div>
 	</main>
+
+	<script src="{{ asset('js/iziToast.js') }}"></script>
 </body>
 
 </html>
