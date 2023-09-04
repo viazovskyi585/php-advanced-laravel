@@ -12,3 +12,13 @@ initDropdown();
 initSidenavBurger(page);
 initCharts();
 initStickyNavbar();
+
+Echo.private("AdminChannel").listen(".UserRegistered", (e) => {
+    console.log(e);
+    iziToast.show({
+        title: "User Registered",
+        message: e.message,
+        position: "topRight",
+        color: "green",
+    });
+});
