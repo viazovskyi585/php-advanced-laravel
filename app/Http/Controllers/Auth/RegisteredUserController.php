@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,9 +22,9 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request): View | string
     {
-        return view('auth.register');
+        return view('auth.register')->fragmentIf($request->hasHeader('HX-Request'), 'form');
     }
 
     /**
@@ -31,7 +32,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(RegisterRequest $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse | Response
     {
         $fields = $request->validated();
 
@@ -46,6 +47,6 @@ class RegisteredUserController extends Controller
 
         event(new UserRegistered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        return hxRedirect(route('home'), redirect(RouteServiceProvider::HOME));
     }
 }

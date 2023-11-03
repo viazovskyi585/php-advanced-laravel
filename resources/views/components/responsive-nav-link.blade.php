@@ -1,4 +1,4 @@
-@props(['active'])
+@props(['active' => false, 'href' => false])
 
 @php
 	$shared = 'block w-full pl-3 pr-4 py-2 border-l-4 text-left text-base font-medium transition duration-150 ease-in-out';
@@ -8,6 +8,14 @@
 	$classes = $shared . ' ' . $stateClasses;
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
-	{{ $slot }}
-</a>
+@echo("href: " . $href)
+
+@if ($href)
+    <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </a>
+@else
+    <button {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </button>
+@endif

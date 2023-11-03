@@ -1,5 +1,6 @@
 <x-guest-layout>
-	<form method="POST" action="{{ route('register') }}">
+    @fragment('form')
+	<form method="POST" hx-post="{{ route('register') }}">
 		@csrf
 
 		<!-- Name -->
@@ -65,4 +66,5 @@
 			</x-primary-button>
 		</div>
 	</form>
+    @endfragment
 </x-guest-layout>
