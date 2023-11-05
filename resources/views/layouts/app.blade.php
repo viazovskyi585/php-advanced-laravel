@@ -12,13 +12,13 @@
 	<link href="https://fonts.bunny.net" rel="preconnect">
 	<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
 
 	<!-- Scripts -->
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="work-sans bg-white font-sans text-base leading-normal tracking-normal text-gray-600 antialiased">
+<body class="work-sans bg-white font-sans text-base leading-normal tracking-normal text-gray-600 antialiased" hx-boost="true">
 	<div class="min-h-screen bg-gray-100">
 		@include('layouts.navigation')
 
@@ -62,6 +62,10 @@
 			</div>
 		</footer>
 	</div>
+
+    <script src="{{ asset('js/iziToast.js') }}"></script>
+
+    @include('vendor.lara-izitoast.toast')
 </body>
 
 </html>

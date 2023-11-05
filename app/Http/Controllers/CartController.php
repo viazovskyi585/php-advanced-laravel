@@ -32,6 +32,8 @@ class CartController extends Controller
             Cart::instance('cart')->add($product, $quantity);
         }
 
+        notify()->success($product->title . 'added to the cart.', "Success");
+
         return redirect()->back();
     }
 

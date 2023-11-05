@@ -39,3 +39,5 @@
 </script>
 
 {{ session()->forget('toasts') }}
+
+@dump('test')
