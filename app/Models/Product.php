@@ -41,6 +41,10 @@ class Product extends Model implements Buyable
     {
         return Attribute::make(
             get: function () {
+                if (str_starts_with($this->attributes['thumbnail'], 'http')) {
+                    return $this->attributes['thumbnail'];
+                }
+
                 $key = "products.thumbnail.{$this->attributes['thumbnail']}";
 
                 if (!Cache::has($key)) {

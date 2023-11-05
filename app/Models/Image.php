@@ -33,6 +33,10 @@ class Image extends Model
     {
         return Attribute::make(
             get: function () {
+                if (str_starts_with($this->attributes['path'], 'http')) {
+                    return $this->attributes['path'];
+                }
+
                 if (!Storage::exists($this->attributes['path'])) {
                     return $this->attributes['path'];
                 }
