@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="htmx-config" content='{"includeIndicatorStyles": false}'>
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Fonts -->
@@ -18,7 +18,7 @@
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="work-sans bg-white font-sans text-base leading-normal tracking-normal text-gray-600 antialiased" hx-boost="true">
+<body class="work-sans bg-white font-sans text-base leading-normal tracking-normal text-gray-600 antialiased" hx-boost="true" hx-indicator="#logo">
 	<div class="min-h-screen bg-gray-100">
 		@include('layouts.navigation')
 
